@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Reporting Portal</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+  <nav>
+    <h2>AI Disaster Management</h2>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#reporting">Reporting</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero" id="home">
+    <h1>🌐 AI-Powered Disaster Management</h1>
+    <p>Using Artificial Intelligence to report disasters, assess risks, allocate resources, and support decision-making for faster and smarter disaster response.</p>
+    <button onclick="document.getElementById('reporting').scrollIntoView({behavior: 'smooth'});">Report a Disaster</button>
+  </div>
+
+  <div class="container">
+    <!-- Features / Steps -->
+    <div class="steps" id="features">
+      <div class="card">
+        <div class="icon">📝</div>
+        <h2>1. Report Disasters</h2>
+        <p>Capture key details such as <span class="highlight">disaster type</span>, <span class="highlight">location</span>, and <span class="highlight">severity</span>.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚠️</div>
+        <h2>2. Assess Risks</h2>
+        <p>Utilize <span class="highlight">AI algorithms</span> to assess the risk level at a given location based on reported data.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h2>3. Allocate Resources</h2>
+        <p>Distribute <span class="highlight">medical supplies, food, and shelter</span> according to disaster impact.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h2>4. Provide Decision Support</h2>
+        <p>Help authorities make <span class="highlight">informed decisions</span> about resource allocation and risk management.</p>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats" id="stats">
+      <div class="stat-box">
+        <h3>120+</h3>
+        <p>Disasters Reported</p>
+      </div>
+      <div class="stat-box">
+        <h3>5000+</h3>
+        <p>Food Packs Distributed</p>
+      </div>
+      <div class="stat-box">
+        <h3>2000+</h3>
+        <p>Medical Kits Supplied</p>
+      </div>
+      <div class="stat-box">
+        <h3>100+</h3>
+        <p>Rescue Teams Deployed</p>
+      </div>
+    </div>
+    
+    <!-- Disaster Dashboard -->
+    <h2 style="text-align:center; margin-top: 50px;">📊 Disaster Dashboard</h2>
+    <div class="dashboard">
+      <div class="dashboard-card">
+        <h3>Total Reports</h3>
+        <div class="stat-number" id="totalReports">0</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>By Disaster Type</h3>
+        <div id="typeBreakdown"></div>
+      </div>
+      <div class="dashboard-card">
+        <h3>By Severity Level</h3>
+        <div id="severityBreakdown"></div>
+      </div>
+    </div>
+
+    <!-- Reporting Section -->
+    <div id="reporting" style="margin-top: 50px;">
+      <h1 style="text-align:center;">🌍 Disaster Reporting Portal</h1>
+
+      <!-- Form -->
+      <form id="disasterForm">
+        <label>Disaster Type:</label>
+        <select id="type" required>
+          <option value="">Select</option>
+          <option>Earthquake</option>
+          <option>Flood</option>
+          <option>Fire</option>
+          <option>Cyclone</option>
+          <option>Landslide</option>
+        </select>
+
+        <label>Location:</label>
+        <input type="text" id="location" placeholder="Enter location (e.g., Delhi)" required>
+
+        <label>Severity:</label>
+        <select id="severity" required>
+          <option value="">Select</option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+          <option>Critical</option>
+        </select>
+
+        <label>Description:</label>
+        <textarea id="description" rows="4" placeholder="Provide details about the disaster situation"></textarea>
+
+        <button type="submit">Submit Report</button>
+      </form>
+
+      <!-- Filter and Export Controls -->
+      <div class="controls">
+        <div class="filter-controls">
+          <label>Filter by Type:</label>
+          <select id="filterType">
+            <option value="">All Types</option>
+            <option>Earthquake</option>
+            <option>Flood</option>
+            <option>Fire</option>
+            <option>Cyclone</option>
+            <option>Landslide</option>
+          </select>
+          
+          <label>Filter by Severity:</label>
+          <select id="filterSeverity">
+            <option value="">All Severities</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+            <option>Critical</option>
+          </select>
+        </div>
+        
+        <button class="export-btn" onclick="exportReports()">
+          <i class="fas fa-file-export"></i> Export Reports
+        </button>
+      </div>
+
+      <!-- Reports Table -->
+      <table id="reportsTable">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Severity</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Map Section -->
+      <h2 style="text-align:center;">🗺️ Disaster Map</h2>
+      <div id="map" style="height: 400px; width: 100%; margin: 20px 0; border-radius:10px;"></div>
+    </div>
+
+    <!-- About -->
+    <div class="about" id="about">
+      <h2>About Our Mission</h2>
+      <p>Traditional disaster management often suffers from delays in reporting, inefficient resource distribution, and lack of real-time risk assessment. 
+      Our AI-powered platform helps authorities <span class="highlight">analyze data faster</span>, <span class="highlight">predict risks</span>, and <span class="highlight">allocate resources intelligently</span>.  
+      This reduces disaster impacts, saves lives, and ensures faster recovery.</p>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="usecases">
+      <h2>🌍 Real-World Use Cases</h2>
+      <div class="case-grid">
+        <div class="case">
+          <h3>🌊 Flood Response</h3>
+          <p>Predict flood-prone zones, evacuate residents early, and deploy relief resources efficiently.</p>
+        </div>
+        <div class="case">
+          <h3>🌋 Earthquake Relief</h3>
+          <p>Assess structural damage instantly and guide emergency teams for quick response.</p>
+        </div>
+        <div class="case">
+          <h3>🦠 Pandemic Control</h3>
+          <p>Monitor outbreak patterns, allocate medical resources, and support healthcare systems.</p>
+        </div>
+        <div class="case">
+          <h3>🔥 Wildfire Management</h3>
+          <p>Use satellite data and AI to track fire spread and protect vulnerable communities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div class="team">
+      <h2>Meet Our Experts</h2>
+      <div class="team-grid">
+        <div class="member">
+          <h3>Nitish Samant</h3>
+          <p>AI Disaster Analyst</p>
+        </div>
+        <div class="member">
+          <h3>Ankita Maurya</h3>
+          <p>Emergency Response Coordinator</p>
+        </div>
+        <div class="member">
+          <h3>Aman Kumar</h3>
+          <p>Risk Assessment Specialist</p>
+        </div>
+        <div class="member">
+          <h3>Krishaya</h3>
+          <p>Logistics & Resource Expert</p>
+        </div>
+        <div class="member">
+          <h3>Aditya Saroj</h3>
+          <p>Logistics & Resource Expert</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact" id="contact">
+      <h2>📩 Get in Touch</h2>
+      <form id="contactForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+<footer>
+  <footer class="footer">
+  <div class="footer-container">
+    <!-- Brand / About -->
+    <div class="footer-section">
+      <h2 class="logo">🌍 Disaster Report</h2>
+      <p>
+        A platform to report, track, and respond to disasters in real time. 
+        Stay safe, stay informed.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Report Disaster</a></li>
+        <li><a href="#">View Reports</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: support@disasterreport.com</p>
+      <p>Phone: +91 98765 43210</p>
+      <p>Location: New Delhi, India</p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Disaster Report System | All Rights Reserved.</p>
+  </div>
+</footer>
+</footer>
+</html>

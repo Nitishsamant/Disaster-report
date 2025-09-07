@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Based Disaster Management</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: #2c3e50;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #3498db;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    .hero p {
+      margin: 1rem auto;
+      font-size: 1.2rem;
+      max-width: 800px;
+    }
+    .hero button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      border: none;
+      background: #e67e22;
+      color: white;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero button:hover {
+      background: #d35400;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    /* Step Cards */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    .highlight {
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    /* Statistics Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .stat-box {
+      background: #3498db;
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .stat-box h3 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    /* About Section */
+    .about {
+      margin-top: 3rem;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+    .about h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    /* Use Cases */
+    .usecases {
+      margin-top: 3rem;
+    }
+    .usecases h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .case {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .case h3 {
+      margin: 0 0 0.5rem;
+      color: #3498db;
+    }
+
+    /* Team */
+    .team {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .team h2 {
+      margin-bottom: 1rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .member {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .member h3 {
+      margin: 0.5rem 0;
+      color: #2c3e50;
+    }
+    .member p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Contact Form */
+    .contact {
+      margin-top: 3rem;
+      background: #eaf4fc;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .contact h2 {
+      margin-bottom: 1rem;
+    }
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .contact button {
+      padding: 0.8rem;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .contact button:hover {
+      background: #2980b9;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #2c3e50;
+      color: white;
+      margin-top: 3rem;
+    }
+    footer p {
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h2>AI Disaster Mgmt</h2>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero" id="home">
+    <h1>🌐 AI-Powered Disaster Management</h1>
+    <p>Using Artificial Intelligence to report disasters, assess risks, allocate resources, and support decision-making for faster and smarter disaster response.</p>
+    <button>Learn More</button>
+  </div>
+
+  <!-- Features / Steps -->
+  <div class="container" id="features">
+    <div class="steps">
+      <div class="card">
+        <div class="icon">📝</div>
+        <h2>1. Report Disasters</h2>
+        <p>Capture key details such as <span class="highlight">disaster type</span>, <span class="highlight">location</span>, and <span class="highlight">severity</span>.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚠️</div>
+        <h2>2. Assess Risks</h2>
+        <p>Utilize <span class="highlight">AI algorithms</span> to assess the risk level at a given location based on reported data.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h2>3. Allocate Resources</h2>
+        <p>Distribute <span class="highlight">medical supplies, food, and shelter</span> according to disaster impact.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h2>4. Provide Decision Support</h2>
+        <p>Help authorities make <span class="highlight">informed decisions</span> about resource allocation and risk management.</p>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats" id="stats">
+      <div class="stat-box">
+        <h3>120+</h3>
+        <p>Disasters Reported</p>
+      </div>
+      <div class="stat-box">
+        <h3>5000+</h3>
+        <p>Food Packs Distributed</p>
+      </div>
+      <div class="stat-box">
+        <h3>2000+</h3>
+        <p>Medical Kits Supplied</p>
+      </div>
+      <div class="stat-box">
+        <h3>100+</h3>
+        <p>Rescue Teams Deployed</p>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="about" id="about">
+      <h2>About Our Mission</h2>
+      <p>Traditional disaster management often suffers from delays in reporting, inefficient resource distribution, and lack of real-time risk assessment. 
+      Our AI-powered platform helps authorities <span class="highlight">analyze data faster</span>, <span class="highlight">predict risks</span>, and <span class="highlight">allocate resources intelligently</span>.  
+      This reduces disaster impacts, saves lives, and ensures faster recovery.</p>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="usecases">
+      <h2>🌍 Real-World Use Cases</h2>
+      <div class="case-grid">
+        <div class="case">
+          <h3>🌊 Flood Response</h3>
+          <p>Predict flood-prone zones, evacuate residents early, and deploy relief resources efficiently.</p>
+        </div>
+        <div class="case">
+          <h3>🌋 Earthquake Relief</h3>
+          <p>Assess structural damage instantly and guide emergency teams for quick response.</p>
+        </div>
+        <div class="case">
+          <h3>🦠 Pandemic Control</h3>
+          <p>Monitor outbreak patterns, allocate medical resources, and support healthcare systems.</p>
+        </div>
+        <div class="case">
+          <h3>🔥 Wildfire Management</h3>
+          <p>Use satellite data and AI to track fire spread and protect vulnerable communities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div class="team">
+      <h2>Meet Our Experts</h2>
+      <div class="team-grid">
+        <div class="member">
+          <h3>Dr. A. Kumar</h3>
+          <p>AI Disaster Analyst</p>
+        </div>
+        <div class="member">
+          <h3>Sarah Lee</h3>
+          <p>Emergency Response Coordinator</p>
+        </div>
+        <div class="member">
+          <h3>John Smith</h3>
+          <p>Risk Assessment Specialist</p>
+        </div>
+        <div class="member">
+          <h3>Maria Garcia</h3>
+          <p>Logistics & Resource Expert</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact" id="contact">
+      <h2>📩 Get in Touch</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AI Disaster Management | Built with ❤️ using HTML & CSS</p>
+    <p>Follow us: 🌐 Facebook | 🐦 Twitter | 📸 Instagram</p>
+  </footer>
+
+</body>
+</html>
