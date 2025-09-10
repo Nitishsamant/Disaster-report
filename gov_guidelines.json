@@ -1,0 +1,26 @@
+{
+  "flood": {
+    "guidelines": [
+      "Move to higher ground immediately.",
+      "Do not attempt to walk or drive through flood waters.",
+      "Listen to official warnings via radio/TV."
+    ],
+    "benefits": [
+      "Free shelter and food provided by SDRF.",
+      "Immediate relief cash assistance.",
+      "Medical camps for flood-affected families."
+    ]
+  },
+  "earthquake": {
+    "guidelines": [
+      "Drop, Cover, and Hold On until the shaking stops.",
+      "Stay away from windows and heavy objects.",
+      "Evacuate only when authorities say it is safe."
+    ],
+    "benefits": [
+      "Free housing repair grants.",
+      "Relief fund for injured citizens.",
+      "Insurance claim assistance."
+    ]
+  }
+}

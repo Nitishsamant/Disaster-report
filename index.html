@@ -78,7 +78,7 @@
     </div>
     
     <!-- Disaster Dashboard -->
-    <h2 style="text-align:center; margin-top: 50px;">📊 Disaster Dashboard</h2>
+    <h2 class="disaster-dashboard-title">📊 Disaster Dashboard</h2>
     <div class="dashboard">
       <div class="dashboard-card">
         <h3>Total Reports</h3>
@@ -95,13 +95,13 @@
     </div>
 
     <!-- Reporting Section -->
-    <div id="reporting" style="margin-top: 50px;">
-      <h1 style="text-align:center;">🌍 Disaster Reporting Portal</h1>
+    <div id="reporting" class="reporting-section">
+      <h1 class="disaster-reporting-title">🌍 Disaster Reporting Portal</h1>
 
       <!-- Form -->
       <form id="disasterForm">
-        <label>Disaster Type:</label>
-        <select id="type" required>
+        <label for="type">Disaster Type:</label>
+        <select id="type" name="type" required title="Disaster Type">
           <option value="">Select</option>
           <option>Earthquake</option>
           <option>Flood</option>
@@ -113,7 +113,7 @@
         <label>Location:</label>
         <input type="text" id="location" placeholder="Enter location (e.g., Delhi)" required>
 
-        <label>Severity:</label>
+        <label for="severity">Severity:</label>
         <select id="severity" required>
           <option value="">Select</option>
           <option>Low</option>
@@ -131,8 +131,8 @@
       <!-- Filter and Export Controls -->
       <div class="controls">
         <div class="filter-controls">
-          <label>Filter by Type:</label>
-          <select id="filterType">
+          <label for="filterType">Filter by Type:</label>
+          <select id="filterType" name="filterType">
             <option value="">All Types</option>
             <option>Earthquake</option>
             <option>Flood</option>
@@ -141,7 +141,7 @@
             <option>Landslide</option>
           </select>
           
-          <label>Filter by Severity:</label>
+          <label for="filterSeverity">Filter by Severity:</label>
           <select id="filterSeverity">
             <option value="">All Severities</option>
             <option>Low</option>
@@ -170,8 +170,8 @@
       </table>
 
       <!-- Map Section -->
-      <h2 style="text-align:center;">🗺️ Disaster Map</h2>
-      <div id="map" style="height: 400px; width: 100%; margin: 20px 0; border-radius:10px;"></div>
+      <h2 class="disaster-map-title">🗺️ Disaster Map</h2>
+      <div id="map"></div>
     </div>
 
     <!-- About -->
@@ -243,6 +243,29 @@
       </form>
     </div>
   </div>
+  <div class="news" id="news">
+  <h2>News and Updates</h2>
+
+  <!-- News Form -->
+  <form id="newsForm">
+    <input type="text" id="newsTitle" placeholder="Enter news title" required>
+    <input type="text" id="newsImage" placeholder="Enter image URL">
+    <textarea id="newsContent" placeholder="Enter news content" required></textarea>
+    <button type="submit">Add News</button>
+  </form>
+
+  <!-- News List -->
+  <div id="newsList">
+    <!-- Example News Item -->
+    <div class="news-item">
+      <h3>Campus Fest 2025 Announced</h3>
+      <img src="https://picsum.photos/300/200" alt="News image">
+      <p>The annual campus fest will be held on October 10th with cultural, sports, and tech events.</p>
+    </div>
+  </div>
+</div>
+
+
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -274,19 +297,19 @@
     <!-- Contact Info -->
     <div class="footer-section">
       <h3>Contact</h3>
-      <p>Email: support@disasterreport.com</p>
-      <p>Phone: +91 98765 43210</p>
-      <p>Location: New Delhi, India</p>
+      <p>Email: wok.samant@gmail.com</p>
+      <p>Phone: +91 ************</p>
+      <p>Location: Gorakhpur, India</p>
     </div>
 
     <!-- Social Media -->
     <div class="footer-section">
       <h3>Follow Us</h3>
       <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </div>

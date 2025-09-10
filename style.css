@@ -686,3 +686,33 @@ tbody tr:hover {
   font-size: 13px;
   margin-top: 30px;
 }
+.news-item img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.news-item p {
+  margin: 0;
+  line-height: 1.5;
+  color: #000000;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #news {
+    padding: 15px;
+  }
+
+  #newsForm input,
+  #newsForm textarea,
+  #newsForm button {
+    font-size: 13px;
+  }
+
+  .news-item img {
+    max-height: 150px;
+  }
+}
